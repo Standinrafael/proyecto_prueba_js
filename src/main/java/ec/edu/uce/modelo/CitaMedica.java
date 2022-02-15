@@ -5,51 +5,54 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cita_medica")
+@Table(name = "cita_medica")
 public class CitaMedica {
 
 	@Id
-	@Column(name="cime_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cita_medica")
+	@SequenceGenerator(name = "seq_cita_medica", sequenceName = "seq_cita_medica", allocationSize = 1)
+	@Column(name = "cime_id")
 	private Integer id;
-	
-	@Column(name="cime_numero")
+
+	@Column(name = "cime_numero")
 	private String numero;
-	
-	@Column(name="cime_fecha_cita")
+
+	@Column(name = "cime_fecha_cita")
 	private LocalDateTime fechaCita;
-	
-	@Column(name="cime_valor_cita")
+
+	@Column(name = "cime_valor_cita")
 	private BigDecimal valorCita;
-	
-	@Column(name="cime_lugar_cita")
+
+	@Column(name = "cime_lugar_cita")
 	private String lugarCita;
-	
-	@Column(name="cime_diagnostico")
+
+	@Column(name = "cime_diagnostico")
 	private String diagnostico;
-	
-	@Column(name="cime_receta")
+
+	@Column(name = "cime_receta")
 	private String receta;
-	
-	@Column(name="cime_fecha_proxima_cita")
+
+	@Column(name = "cime_fecha_proxima_cita")
 	private LocalDateTime fechaProximaCita;
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="paci_id")
+	@JoinColumn(name = "paci_id")
 	private Paciente paciente;
-	
+
 	@ManyToOne
-	@JoinColumn(name="doct_id")
+	@JoinColumn(name = "doct_id")
 	private Doctor doctor;
-	
-	
-	//Metodos GET y SETs
+
+	// Metodos GET y SETs
 	public Integer getId() {
 		return id;
 	}
@@ -129,6 +132,12 @@ public class CitaMedica {
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "CitaMedica [id=" + id + ", numero=" + numero + ", valorCita=" + valorCita + ", fechaProximaCita="
+				+ fechaProximaCita + ", lugarCita=" + lugarCita + ", paciente=" + paciente + ", doctor=" + doctor
+				+ ", fechaCita=" + fechaCita + ", diagnostico=" + diagnostico + ", receta=" + receta + "]";
+	}
+
 }

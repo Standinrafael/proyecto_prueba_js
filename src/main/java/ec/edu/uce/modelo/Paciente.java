@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +18,8 @@ public class Paciente {
 
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_paciente")
+	@SequenceGenerator(name="seq_paciente",sequenceName="seq_paciente",allocationSize=1)
 	@Column(name="paci_id")
 	private Integer id;
 	
@@ -124,6 +129,13 @@ public class Paciente {
 
 	public void setCitas(List<CitaMedica> citas) {
 		this.citas = citas;
+	}
+
+	@Override
+	public String toString() {
+		return "Paciente [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", fechaNacimiento=" + fechaNacimiento + ", codigoSeguro=" + codigoSeguro + ", estatura=" + estatura
+				+ ", peso=" + peso + ", genero=" + genero + "]";
 	}
 	
 	
