@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +17,8 @@ import javax.persistence.Table;
 public class Doctor {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_doctor")
+	@SequenceGenerator(name="seq_doctor",sequenceName="seq_doctor",allocationSize=1)
 	@Column(name="doct_id")
 	private Integer id;
 	
