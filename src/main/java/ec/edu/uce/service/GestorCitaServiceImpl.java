@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ec.edu.uce.modelo.CitaMedica;
+import ec.edu.uce.modelo.Doctor;
+import ec.edu.uce.modelo.Paciente;
 
 @Service
 public class GestorCitaServiceImpl implements IGestorCitaService {
@@ -24,12 +26,15 @@ public class GestorCitaServiceImpl implements IGestorCitaService {
 	public void agendarCita(String numero, LocalDateTime fecha, BigDecimal valor, String lugar, String cedulaDoctor,
 			String cedulaPaciente) {
 		// TODO Auto-generated method stub
+		Paciente p1=this.pacienteService.buscarPorCedula(cedulaPaciente);
+		Doctor d1=this.doctorService.buscarPorCedula(cedulaDoctor);
 		CitaMedica c1=new CitaMedica();
 		c1.setNumero(numero);
 		c1.setFechaCita(fecha);
 		c1.setValorCita(valor);
-		c1.setPaciente(this.pacienteService.buscarPorCedula(cedulaPaciente));
-		c1.setDoctor(this.doctorService.buscarPorCedula(cedulaPaciente));
+		c1.setLugarCita(lugar);
+		c1.setPaciente(p1);
+		c1.setDoctor(d1);
 		
 		this.citaService.insertar(c1);
 		

@@ -130,6 +130,13 @@ public class Paciente {
 	public void setCitas(List<CitaMedica> citas) {
 		this.citas = citas;
 	}
+
+	@Override
+	public String toString() {
+		return "Paciente [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", fechaNacimiento=" + fechaNacimiento + ", codigoSeguro=" + codigoSeguro + ", estatura=" + estatura
+				+ ", peso=" + peso + ", genero=" + genero + ", citas=" + citas + "]";
+	}
 	
 	
 }

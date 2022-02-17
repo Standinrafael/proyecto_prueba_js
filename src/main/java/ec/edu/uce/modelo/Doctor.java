@@ -108,6 +108,13 @@ public class Doctor {
 	public void setCitas(List<CitaMedica> citas) {
 		this.citas = citas;
 	}
+
+	@Override
+	public String toString() {
+		return "Doctor [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", fechaNacimiento=" + fechaNacimiento + ", numeroConsultorio=" + numeroConsultorio + ", genero="
+				+ genero + ", citas=" + citas + "]";
+	}
 	
 
 }

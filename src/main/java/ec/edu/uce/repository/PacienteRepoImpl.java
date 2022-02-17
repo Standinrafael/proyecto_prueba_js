@@ -2,9 +2,11 @@ package ec.edu.uce.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+import org.apache.log4j.Logger;
 
 import ec.edu.uce.modelo.Paciente;
 
@@ -12,6 +14,8 @@ import ec.edu.uce.modelo.Paciente;
 @Transactional
 public class PacienteRepoImpl implements IPacienteRepo {
 
+	final static Logger LOGGER= Logger.getLogger(PacienteRepoImpl.class);
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
@@ -19,6 +23,7 @@ public class PacienteRepoImpl implements IPacienteRepo {
 	public void insertar(Paciente paciente) {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(paciente);
+		LOGGER.info(paciente);
 	}
 
 	@Override
@@ -43,7 +48,10 @@ public class PacienteRepoImpl implements IPacienteRepo {
 	@Override
 	public Paciente buscarPorCedula(String cedula) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		TypedQuery<Paciente> miQuery= this.entityManager.createQuery("select p from Paciente p where p.cedula=:cedula",Paciente.class);
+		miQuery.setParameter("cedula", cedula);
+		return miQuery.getSingleResult();
 	}
 
 }
